@@ -5,6 +5,9 @@ namespace MathFunctions;
 use MathFunctions\MathInputException;
 use MathFunctions\MathResultFormatter;
 
+/**
+ * A class providing various integer-based mathematical operations.
+ */
 class IntegerOperations
 {
   const FACTORIALS = [
