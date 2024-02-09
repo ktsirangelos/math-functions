@@ -2,8 +2,7 @@
 
 use MathFunctions\IntegerUtils;
 use PHPUnit\Framework\TestCase;
-
-require_once __DIR__ . '/../src/IntegerUtils.php';
+use MathFunctions\MyException;
 
 class IntegerUtilsTest extends TestCase
 {
@@ -23,43 +22,43 @@ class IntegerUtilsTest extends TestCase
     $this->assertEquals([2, 4999], $this->solution->calcDivisors(-9998));
 
     // Edge Cases
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(0);
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(1);
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(-10000);
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(10000);
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(-10001);
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(10001);
 
     // Prime Numbers
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(11);
 
     // Composite Odd Numbers
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(27);
 
     // Non-Integer Cases
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors('hello');
 
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(MyException::class);
     $this->solution->calcDivisors(12.65);
 
-    // $this->expectException(InvalidArgumentException::class);
+    // $this->expectException(MyException::class);
     // $this->solution->calcDivisors(NAN);
 
-    // $this->expectException(InvalidArgumentException::class);
+    // $this->expectException(MyException::class);
     // $this->solution->calcDivisors([1, 2, 3]); // Array
   }
 

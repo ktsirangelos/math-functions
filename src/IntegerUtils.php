@@ -2,32 +2,48 @@
 
 namespace MathFunctions;
 
+use MathFunctions\MyException;
+use MathFunctions\MathOperationsFormatter;
+
 class IntegerUtils
 {
+  const FACTORIALS = [
+    0 => 1,
+    1 => 1,
+    2 => 2,
+    3 => 6,
+    4 => 24,
+    5 => 120,
+    6 => 720,
+    7 => 5040,
+    8 => 40320,
+    9 => 362880,
+    10 => 3628800,
+    11 => 39916800,
+    12 => 479001600
+  ];
+
   /**
    * Calculates the divisors of an integer (excluding 1 and itself).
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
-   * @throws InvalidArgumentException If the input is not an integer, is zero, is one, is
+   * @throws MyException If the input is not an integer, is zero, is one, is
    *         outside the range -10000 to 10000, or is a prime number.
    */
   public function calcDivisors(int $integer): array
   {
-    if (!is_int($integer)) {
-      throw new \InvalidArgumentException("Input must be an integer");
-    }
     if ($integer == 0) {
-      throw new \InvalidArgumentException("Input must not be zero");
+      throw new MyException("Input must not be zero");
     }
     if ($integer == 1) {
-      throw new \InvalidArgumentException("Input must not be one");
+      throw new MyException("Input must not be one");
     }
     if ($integer < -10000 || $integer > 10000) {
-      throw new \InvalidArgumentException("Input must be between -10000 and 10000.");
+      throw new MyException("Input must be between -10000 and 10000.");
     }
     if ($this->isPrime(abs($integer))) {
-      throw new \InvalidArgumentException("Prime numbers are not allowed.");
+      throw new MyException("Prime numbers are not allowed.");
     }
 
     $divisors = [];
@@ -52,18 +68,14 @@ class IntegerUtils
    *
    * @param int $integer The number to calculate the factorial of.
    * @return int The factorial of the number.
-   * @throws InvalidArgumentException If the input is not an integer or is outside the range 0 to 12.
+   * @throws MyException If the input is not an integer or is outside the range 0 to 12.
    */
   public function calcFactorial(int $integer): int
   {
-    if (!is_int($integer)) {
-      throw new \InvalidArgumentException("Input must be an integer");
-    }
     if ($integer < 0 || $integer > 12) {
-      throw new \InvalidArgumentException("Input must be between 0 and 12");
+      throw new MyException("Input must be between 0 and 12");
     }
-    $factorials = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600];
-    return $factorials[$integer];
+    return self::FACTORIALS[$integer];
   }
 
   /**
@@ -71,26 +83,23 @@ class IntegerUtils
    *
    * @param int[] $integerArray An array of integers.
    * @return string An XML string containing the prime numbers with an 'amount' attribute.
-   * @throws InvalidArgumentException If the input is not an array, is empty, contains non-integer elements,
+   * @throws MyException If the input is not an array, is empty, contains non-integer elements,
    *         exceeds 500 elements, or individual integers exceed +/- 10000.
    */
   public function calcPrimeNumbers(array $integerArray): string
   {
-    if (!is_array($integerArray)) {
-      throw new \InvalidArgumentException("Input must be an array");
-    }
     if (count($integerArray) < 1) {
       return '<primeNumbers amount="0"><result/></primeNumbers>';
     }
     if (count($integerArray) > 500) {
-      throw new \InvalidArgumentException("Array cannot exceed 500 elements");
+      throw new MyException("Array cannot exceed 500 elements");
     }
     foreach ($integerArray as $integer) {
       if (!is_int($integer)) {
-        throw new \InvalidArgumentException("All elements in the array must be integers");
+        throw new MyException("All elements in the array must be integers");
       }
       if (abs($integer) > 10000) {
-        throw new \InvalidArgumentException("Individual integers cannot exceed +/- 10000");
+        throw new MyException("Individual integers cannot exceed +/- 10000");
       }
     }
 
@@ -101,13 +110,7 @@ class IntegerUtils
       }
     }
 
-    $xml = new \SimpleXMLElement('<primeNumbers/>');
-    $xml->addAttribute('amount', count($primeNumbers));
-    $result = $xml->addChild('result');
-    foreach ($primeNumbers as $prime) {
-      $result->addChild('number', $prime);
-    }
-    return $xml->asXML();
+    return (new MathOperationsFormatter())->toXML('primeNumbers', $primeNumbers);
   }
 
   /**
