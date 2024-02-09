@@ -2,10 +2,10 @@
 
 namespace MathFunctions;
 
-use MathFunctions\MyException;
-use MathFunctions\MathOperationsFormatter;
+use MathFunctions\MathInputException;
+use MathFunctions\MathResultFormatter;
 
-class IntegerUtils
+class IntegerOperations
 {
   const FACTORIALS = [
     0 => 1,
@@ -28,22 +28,22 @@ class IntegerUtils
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
-   * @throws MyException If the input is not an integer, is zero, is one, is
+   * @throws MathInputException If the input is not an integer, is zero, is one, is
    *         outside the range -10000 to 10000, or is a prime number.
    */
   public function calcDivisors(int $integer): array
   {
     if ($integer == 0) {
-      throw new MyException("Input must not be zero");
+      throw new MathInputException("Input must not be zero");
     }
     if ($integer == 1) {
-      throw new MyException("Input must not be one");
+      throw new MathInputException("Input must not be one");
     }
     if ($integer < -10000 || $integer > 10000) {
-      throw new MyException("Input must be between -10000 and 10000.");
+      throw new MathInputException("Input must be between -10000 and 10000.");
     }
     if ($this->isPrime(abs($integer))) {
-      throw new MyException("Prime numbers are not allowed.");
+      throw new MathInputException("Prime numbers are not allowed.");
     }
 
     $divisors = [];
@@ -68,12 +68,12 @@ class IntegerUtils
    *
    * @param int $integer The number to calculate the factorial of.
    * @return int The factorial of the number.
-   * @throws MyException If the input is not an integer or is outside the range 0 to 12.
+   * @throws MathInputException If the input is not an integer or is outside the range 0 to 12.
    */
   public function calcFactorial(int $integer): int
   {
     if ($integer < 0 || $integer > 12) {
-      throw new MyException("Input must be between 0 and 12");
+      throw new MathInputException("Input must be between 0 and 12");
     }
     return self::FACTORIALS[$integer];
   }
@@ -83,7 +83,7 @@ class IntegerUtils
    *
    * @param int[] $integerArray An array of integers.
    * @return string An XML string containing the prime numbers with an 'amount' attribute.
-   * @throws MyException If the input is not an array, is empty, contains non-integer elements,
+   * @throws MathInputException If the input is not an array, is empty, contains non-integer elements,
    *         exceeds 500 elements, or individual integers exceed +/- 10000.
    */
   public function calcPrimeNumbers(array $integerArray): string
@@ -92,14 +92,14 @@ class IntegerUtils
       return '<primeNumbers amount="0"><result/></primeNumbers>';
     }
     if (count($integerArray) > 500) {
-      throw new MyException("Array cannot exceed 500 elements");
+      throw new MathInputException("Array cannot exceed 500 elements");
     }
     foreach ($integerArray as $integer) {
       if (!is_int($integer)) {
-        throw new MyException("All elements in the array must be integers");
+        throw new MathInputException("All elements in the array must be integers");
       }
       if (abs($integer) > 10000) {
-        throw new MyException("Individual integers cannot exceed +/- 10000");
+        throw new MathInputException("Individual integers cannot exceed +/- 10000");
       }
     }
 
@@ -110,7 +110,7 @@ class IntegerUtils
       }
     }
 
-    return (new MathOperationsFormatter())->toXML('primeNumbers', $primeNumbers);
+    return (new MathResultFormatter())->toXML('primeNumbers', $primeNumbers);
   }
 
   /**

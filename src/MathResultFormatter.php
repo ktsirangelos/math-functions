@@ -2,7 +2,7 @@
 
 namespace MathFunctions;
 
-class MathOperationsFormatter
+class MathResultFormatter
 {
   public function toXML(string $operationType, array $numbers): string
   {
