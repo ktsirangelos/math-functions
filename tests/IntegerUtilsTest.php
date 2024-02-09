@@ -3,9 +3,9 @@
 use MathFunctions\IntegerUtils;
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../src/Solution.php';
+require_once __DIR__ . '/../src/IntegerUtils.php';
 
-class SolutionTest extends TestCase
+class IntegerUtilsTest extends TestCase
 {
   private $solution;
 
@@ -56,7 +56,6 @@ class SolutionTest extends TestCase
     $this->expectException(InvalidArgumentException::class);
     $this->solution->calcDivisors(12.65);
 
-    // You might consider these if relevant to your use case:
     // $this->expectException(InvalidArgumentException::class);
     // $this->solution->calcDivisors(NAN);
 
@@ -66,4 +65,3 @@ class SolutionTest extends TestCase
 
   // ... Tests for calcFactorial, calcPrimeNumbers, etc. ...
 }
-
