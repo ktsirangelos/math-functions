@@ -39,11 +39,15 @@ class IntegerOperations
     if ($integer == 0) {
       throw new MathInputException("Input must not be zero");
     }
-    if ($integer == 1 || $integer == -1) { // Include -1
+    if ($integer == 1 || $integer == -1) {
       throw new MathInputException("Input must not be one or negative one");
     }
     if ($integer < -10000 || $integer > 10000) {
       throw new MathInputException("Input must be between -10000 and 10000.");
+    }
+
+    if ($this->isPrime(abs($integer))) {
+      throw new MathInputException("Prime numbers are not allowed.");
     }
 
     $divisors = [];
@@ -52,12 +56,10 @@ class IntegerOperations
 
     for ($i = 2; $i <= $sqrtInteger; $i++) {
       if ($absInteger % $i == 0) {
-        array_push($divisors, $i);        // Add the positive divisor
-        array_push($divisors, -$i);       // Add the corresponding negative divisor
+        $divisors = [...$divisors, $i, -$i];
 
         if ($i != $sqrtInteger) {
-          array_push($divisors, $absInteger / $i);
-          array_push($divisors, - ($absInteger / $i)); // Add negatives of other pair
+          $divisors = [...$divisors, $absInteger / $i, - ($absInteger / $i)];
         }
       }
     }

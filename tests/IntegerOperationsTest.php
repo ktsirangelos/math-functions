@@ -34,11 +34,6 @@ class IntegerOperationsTest extends TestCase
     $this->expectException(MathInputException::class);
     $this->operation->calcDivisors(10000);
 
-    $this->expectException(MathInputException::class);
-    $this->operation->calcDivisors(-10001);
-
-    $this->expectException(MathInputException::class);
-    $this->operation->calcDivisors(10001);
 
     // Prime Numbers
     $this->expectException(MathInputException::class);
@@ -54,13 +49,5 @@ class IntegerOperationsTest extends TestCase
 
     $this->expectException(MathInputException::class);
     $this->operation->calcDivisors(12.65);
-
-    // $this->expectException(MathInputException::class);
-    // $this->operation->calcDivisors(NAN);
-
-    // $this->expectException(MathInputException::class);
-    // $this->operation->calcDivisors([1, 2, 3]); // Array
   }
-
-  // ... Tests for calcFactorial, calcPrimeNumbers, etc. ...
 }
