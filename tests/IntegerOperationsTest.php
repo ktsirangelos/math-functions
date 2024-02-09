@@ -16,10 +16,10 @@ class IntegerOperationsTest extends TestCase
   public function testCalcDivisors()
   {
     // Valid Integer Inputs
-    $this->assertEquals([2, 3], $this->operation->calcDivisors(6));
-    $this->assertEquals([2, 4], $this->operation->calcDivisors(-8));
-    $this->assertEquals([2, 4999], $this->operation->calcDivisors(9998));
-    $this->assertEquals([2, 4999], $this->operation->calcDivisors(-9998));
+    $this->assertEquals([-3, -2, 2, 3], $this->operation->calcDivisors(6));
+    $this->assertEquals([-4, -2, 2, 4], $this->operation->calcDivisors(-8));
+    $this->assertEquals([-4999, -2, 2, 4999], $this->operation->calcDivisors(9998));
+    $this->assertEquals([-4999, -2, 2, 4999], $this->operation->calcDivisors(-9998));
 
     // Edge Cases
     $this->expectException(MathInputException::class);

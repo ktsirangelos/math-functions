@@ -31,22 +31,19 @@ class IntegerOperations
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
-   * @throws MathInputException If the input is not an integer, is zero, is one, is
-   *         outside the range -10000 to 10000, or is a prime number.
+   * @throws MathInputException If the input is not an integer, is zero, is one, or
+   *     is outside the range -10000 to 10000.
    */
   public function calcDivisors(int $integer): array
   {
     if ($integer == 0) {
       throw new MathInputException("Input must not be zero");
     }
-    if ($integer == 1) {
-      throw new MathInputException("Input must not be one");
+    if ($integer == 1 || $integer == -1) { // Include -1
+      throw new MathInputException("Input must not be one or negative one");
     }
     if ($integer < -10000 || $integer > 10000) {
       throw new MathInputException("Input must be between -10000 and 10000.");
-    }
-    if ($this->isPrime(abs($integer))) {
-      throw new MathInputException("Prime numbers are not allowed.");
     }
 
     $divisors = [];
@@ -55,9 +52,12 @@ class IntegerOperations
 
     for ($i = 2; $i <= $sqrtInteger; $i++) {
       if ($absInteger % $i == 0) {
-        array_push($divisors, $i);
+        array_push($divisors, $i);        // Add the positive divisor
+        array_push($divisors, -$i);       // Add the corresponding negative divisor
+
         if ($i != $sqrtInteger) {
           array_push($divisors, $absInteger / $i);
+          array_push($divisors, - ($absInteger / $i)); // Add negatives of other pair
         }
       }
     }
