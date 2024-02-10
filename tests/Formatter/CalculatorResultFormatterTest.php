@@ -6,9 +6,9 @@ namespace MathFunctions\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use MathFunctions\MathResultFormatter;
+use MathFunctions\CalculatorResultFormatter;
 
-class MathResultFormatterTest extends TestCase
+class CalculatorResultFormatterTest extends TestCase
 {
   public static function xmlOutputDataProvider(): array
   {
@@ -22,7 +22,7 @@ class MathResultFormatterTest extends TestCase
   #[DataProvider('xmlOutputDataProvider')]
   public function testToXML($operationType, $numbers, $expectedXML)
   {
-    $formatter = new MathResultFormatter();
+    $formatter = new CalculatorResultFormatter();
     $result = $formatter->toXML($operationType, $numbers);
 
     $this->assertXmlStringEqualsXmlString($expectedXML, $result);
@@ -30,7 +30,7 @@ class MathResultFormatterTest extends TestCase
 
   public function testToXMLWithEmptyInput()
   {
-    $formatter = new MathResultFormatter();
+    $formatter = new CalculatorResultFormatter();
     $result = $formatter->toXML('division', []);
 
     $this->assertXmlStringEqualsXmlString('<division amount="0"><result/></division>', $result);

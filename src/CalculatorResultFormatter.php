@@ -5,7 +5,7 @@ namespace MathFunctions;
 /**
  * Provides XML formatting functionality for mathematical results.
  */
-class MathResultFormatter
+class CalculatorResultFormatter
 {
   /**
    * Formats mathematical calculation results into an XML string.

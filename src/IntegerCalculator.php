@@ -2,8 +2,8 @@
 
 namespace MathFunctions;
 
-use MathFunctions\MathInputException;
-use MathFunctions\MathResultFormatter;
+use MathFunctions\CalculatorInputException;
+use MathFunctions\CalculatorResultFormatter;
 
 /**
  * A class providing various integer-based mathematical operations.
@@ -31,23 +31,23 @@ class IntegerCalculator
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
-   * @throws MathInputException If the input is not an integer, is zero, is one, or
+   * @throws CalculatorInputException If the input is not an integer, is zero, is one, or
    *     is outside the range -10000 to 10000.
    */
   public function calcDivisors(int $integer): array
   {
     if ($integer == 0) {
-      throw new MathInputException("Input must not be zero");
+      throw new CalculatorInputException("Input must not be zero");
     }
     if ($integer == 1 || $integer == -1) {
-      throw new MathInputException("Input must not be one or negative one");
+      throw new CalculatorInputException("Input must not be one or negative one");
     }
     if ($integer < -10000 || $integer > 10000) {
-      throw new MathInputException("Input must be between -10000 and 10000.");
+      throw new CalculatorInputException("Input must be between -10000 and 10000.");
     }
 
     if ($this->isPrime(abs($integer))) {
-      throw new MathInputException("Prime numbers are not allowed.");
+      throw new CalculatorInputException("Prime numbers are not allowed.");
     }
 
     $divisors = [];
@@ -73,12 +73,12 @@ class IntegerCalculator
    *
    * @param int $integer The number to calculate the factorial of.
    * @return int The factorial of the number.
-   * @throws MathInputException If the input is not an integer or is outside the range 0 to 12.
+   * @throws CalculatorInputException If the input is not an integer or is outside the range 0 to 12.
    */
   public function calcFactorial(int $integer): int
   {
     if ($integer < 0 || $integer > 12) {
-      throw new MathInputException("Input must be between 0 and 12");
+      throw new CalculatorInputException("Input must be between 0 and 12");
     }
     return self::FACTORIALS[$integer];
   }
@@ -88,7 +88,7 @@ class IntegerCalculator
    *
    * @param int[] $integerArray An array of integers.
    * @return string An XML string containing the prime numbers with an 'amount' attribute.
-   * @throws MathInputException If the input is not an array, is empty, contains non-integer elements,
+   * @throws CalculatorInputException If the input is not an array, is empty, contains non-integer elements,
    *         exceeds 500 elements, or individual integers exceed +/- 10000.
    */
   public function calcPrimeNumbers(array $integerArray): string
@@ -97,14 +97,14 @@ class IntegerCalculator
       return '<primeNumbers amount="0"><result/></primeNumbers>';
     }
     if (count($integerArray) > 500) {
-      throw new MathInputException("Array cannot exceed 500 elements");
+      throw new CalculatorInputException("Array cannot exceed 500 elements");
     }
     foreach ($integerArray as $integer) {
       if (!is_int($integer)) {
-        throw new MathInputException("All elements in the array must be integers");
+        throw new CalculatorInputException("All elements in the array must be integers");
       }
       if (abs($integer) > 10000) {
-        throw new MathInputException("Individual integers cannot exceed +/- 10000");
+        throw new CalculatorInputException("Individual integers cannot exceed +/- 10000");
       }
     }
 
@@ -115,7 +115,7 @@ class IntegerCalculator
       }
     }
 
-    return (new MathResultFormatter())->toXML('primeNumbers', $primeNumbers);
+    return (new CalculatorResultFormatter())->toXML('primeNumbers', $primeNumbers);
   }
 
   /**
