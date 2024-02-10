@@ -2,8 +2,8 @@
 
 namespace MathFunctions;
 
-use MathFunctions\CalculatorInputException;
-use MathFunctions\CalculatorResultFormatter;
+use MathFunctions\Exceptions\CalculatorInputException;
+use MathFunctions\Exceptions\CalculatorResultFormatter;
 
 /**
  * A class providing various integer-based mathematical operations.

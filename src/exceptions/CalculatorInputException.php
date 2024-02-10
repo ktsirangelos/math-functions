@@ -1,6 +1,6 @@
 <?php
 
-namespace MathFunctions;
+namespace MathFunctions\Exceptions;
 
 /**
  * Represents errors related to invalid mathematical input.

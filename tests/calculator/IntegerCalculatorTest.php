@@ -4,8 +4,8 @@ namespace MathFunctions\Tests;
 
 use PHPUnit\Framework\TestCase;
 use MathFunctions\IntegerCalculator;
-use MathFunctions\CalculatorInputException;
-use MathFunctions\FormatterInputException;
+use MathFunctions\Exceptions\CalculatorInputException;
+use MathFunctions\Exceptions\FormatterInputException;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class IntegerCalculatorTest extends TestCase
