@@ -21,16 +21,16 @@ class CalculatorResultFormatterTest extends TestCase
   public static function xmlOutputDataProvider(): array
   {
     return [
-      ['addition', [2, 3, 5], '<addition amount="3"><result><number>2</number><number>3</number><number>5</number></result></addition>'],
-      ['subtraction', [10, 5], '<subtraction amount="2"><result><number>10</number><number>5</number></result></subtraction>'],
-      ['multiplication', [4, 0, 6], '<multiplication amount="3"><result><number>4</number><number>0</number><number>6</number></result></multiplication>'],
+      ['primeNumbers', [2, 3, 5], '<primeNumbers amount="3"><result><number>2</number><number>3</number><number>5</number></result></primeNumbers>'],
+      ['evenNumbers', [6, 8], '<evenNumbers amount="2"><result><number>6</number><number>8</number></result></evenNumbers>'],
+      ['negativeNumbers', [-4, -7, -9], '<negativeNumbers amount="3"><result><number>-4</number><number>-7</number><number>-9</number></result></negativeNumbers>'],
     ];
   }
 
   #[DataProvider('xmlOutputDataProvider')]
-  public function testToXML($operationType, $numbers, $expectedXML): void
+  public function testToXML($numbersType, $numbers, $expectedXML): void
   {
-    $result = $this->formatter->toXML($operationType, $numbers);
+    $result = $this->formatter->toXML($numbersType, $numbers);
     $this->assertXmlStringEqualsXmlString($expectedXML, $result);
   }
 
@@ -38,6 +38,6 @@ class CalculatorResultFormatterTest extends TestCase
   {
 
     $this->expectException(FormatterInputException::class);
-    $this->formatter->toXML('string', []);
+    $this->formatter->toXML('emptyArray', []);
   }
 }
