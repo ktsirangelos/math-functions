@@ -93,9 +93,6 @@ class IntegerCalculator
    */
   public function calcPrimeNumbers(array $integerArray): string
   {
-    if (count($integerArray) < 1) {
-      return '<primeNumbers amount="0"><result/></primeNumbers>';
-    }
     if (count($integerArray) > 500) {
       throw new CalculatorInputException("Array cannot exceed 500 elements");
     }

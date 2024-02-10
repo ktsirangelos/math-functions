@@ -7,9 +7,17 @@ namespace MathFunctions\Tests;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use MathFunctions\CalculatorResultFormatter;
+use MathFunctions\FormatterInputException;
 
 class CalculatorResultFormatterTest extends TestCase
 {
+  private $formatter;
+
+  protected function setUp(): void
+  {
+    $this->formatter = new CalculatorResultFormatter();
+  }
+
   public static function xmlOutputDataProvider(): array
   {
     return [
@@ -20,19 +28,16 @@ class CalculatorResultFormatterTest extends TestCase
   }
 
   #[DataProvider('xmlOutputDataProvider')]
-  public function testToXML($operationType, $numbers, $expectedXML)
+  public function testToXML($operationType, $numbers, $expectedXML): void
   {
-    $formatter = new CalculatorResultFormatter();
-    $result = $formatter->toXML($operationType, $numbers);
-
+    $result = $this->formatter->toXML($operationType, $numbers);
     $this->assertXmlStringEqualsXmlString($expectedXML, $result);
   }
 
-  public function testToXMLWithEmptyInput()
+  public function testToXMLWithEmptyInput(): void
   {
-    $formatter = new CalculatorResultFormatter();
-    $result = $formatter->toXML('division', []);
 
-    $this->assertXmlStringEqualsXmlString('<division amount="0"><result/></division>', $result);
+    $this->expectException(FormatterInputException::class);
+    $this->formatter->toXML('string', []);
   }
 }

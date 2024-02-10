@@ -2,6 +2,8 @@
 
 namespace MathFunctions;
 
+use MathFunctions\FormatterInputException;
+
 /**
  * Provides XML formatting functionality for mathematical results.
  */
@@ -17,7 +19,12 @@ class CalculatorResultFormatter
    */
   public function toXML(string $operationType, array $numbers): string
   {
-    $xml = new \SimpleXMLElement('<' . $operationType . '/>');
+    if (empty($numbers)) {
+      throw new FormatterInputException('Input array cannot be empty');
+    }
+
+    $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><' . $operationType . '/>');
+
     $xml->addAttribute('amount', count($numbers));
     $result = $xml->addChild('result');
 
