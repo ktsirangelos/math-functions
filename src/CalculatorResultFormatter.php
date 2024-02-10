@@ -16,6 +16,7 @@ class CalculatorResultFormatter
    * @param array $numbers An array of numbers to be placed in the child elements.
    *
    * @return string The formatted XML string representing the calculation result.
+   * @throws FormatterInputException If the input array is empty.
    */
   public function toXML(string $numbersType, array $numbers): string
   {
@@ -23,15 +24,20 @@ class CalculatorResultFormatter
       throw new FormatterInputException('Input array cannot be empty');
     }
 
-    $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><' . $numbersType . '/>');
+    $dom = new \DOMDocument('1.0', 'UTF-8');
 
-    $xml->addAttribute('amount', count($numbers));
-    $result = $xml->addChild('result');
+    $root = $dom->createElement($numbersType);
+    $root->setAttribute('amount', count($numbers));
+    $dom->appendChild($root);
+
+    $resultNode = $dom->createElement('result');
+    $root->appendChild($resultNode);
 
     foreach ($numbers as $number) {
-      $result->addChild('number', $number);
+      $numberNode = $dom->createElement('number', $number);
+      $resultNode->appendChild($numberNode);
     }
 
-    return $xml->asXML();
+    return $dom->saveXML();
   }
 }
