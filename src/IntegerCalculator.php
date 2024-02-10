@@ -27,7 +27,7 @@ class IntegerCalculator
   ];
 
   /**
-   * Calculates the divisors of an integer (excluding 1 and itself).
+   * Calculates the positive and negative divisors of an integer (excluding 1 and itself).
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
@@ -59,19 +59,21 @@ class IntegerCalculator
         array_push($divisors, $i, -$i);
 
         if ($i != $sqrtInteger) {
-          array_push($divisors, $absInteger / $i, - ($absInteger / $i));
+          $complDivisor = $absInteger / $i;
+          array_push($divisors, $complDivisor, -$complDivisor);
         }
       }
     }
 
     sort($divisors);
+
     return $divisors;
   }
 
   /**
-   * Calculates the factorial of a number.
+   * Calculates the factorial of an integer.
    *
-   * @param int $integer The number to calculate the factorial of.
+   * @param int $integer The integer to calculate the factorial of.
    * @return int The factorial of the number.
    * @throws CalculatorInputException If the input is not an integer or is outside the range 0 to 12.
    */
@@ -80,6 +82,7 @@ class IntegerCalculator
     if ($integer < 0 || $integer > 12) {
       throw new CalculatorInputException("Input must be between 0 and 12");
     }
+
     return self::FACTORIALS[$integer];
   }
 
@@ -87,7 +90,7 @@ class IntegerCalculator
    * Finds prime numbers within an array of integers and returns them in XML format.
    *
    * @param int[] $integerArray An array of integers.
-   * @return string An XML string containing the prime numbers with an 'amount' attribute.
+   * @return string An XML string containing the prime numbers with an 'amount' attribute mentioning the amount of nodes.
    * @throws CalculatorInputException If the input is not an array, is empty, contains non-integer elements,
    *         exceeds 500 elements, or individual integers exceed +/- 10000.
    */
@@ -109,6 +112,7 @@ class IntegerCalculator
     }
 
     $primeNumbers = [];
+
     foreach ($integerArray as $integer) {
       if ($this->isPrime($integer)) {
         $primeNumbers[] = $integer;
@@ -119,9 +123,9 @@ class IntegerCalculator
   }
 
   /**
-   * Determines whether a number is a prime number.
+   * Determines whether an integer is a prime number.
    *
-   * @param int $integer The number to check.
+   * @param int $integer The integer to check for primality.
    * @return bool True if the number is prime, false otherwise.
    */
   private function isPrime(int $integer): bool
@@ -131,11 +135,13 @@ class IntegerCalculator
     if ($integer % 2 == 0 || $integer % 3 == 0) return false;
 
     $sqrtInteger = sqrt($integer);
+
     for ($i = 5; $i <= $sqrtInteger; $i += 6) {
       if ($integer % $i == 0 || $integer % ($i + 2) == 0) {
         return false;
       }
     }
+
     return true;
   }
 }
