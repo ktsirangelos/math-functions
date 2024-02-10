@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MathFunctions;
 
 use MathFunctions\Exceptions\CalculatorInputException;
-use MathFunctions\Exceptions\CalculatorResultFormatter;
+use MathFunctions\CalculatorResultFormatter;
 
 /**
  * A class providing various integer-based mathematical operations.
