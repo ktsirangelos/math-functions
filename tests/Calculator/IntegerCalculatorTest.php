@@ -73,7 +73,7 @@ class IntegerCalculatorTest extends TestCase
   // Test with empty array
   public function testEmptyArray(): void
   {
-    $this->expectException(FormatterInputException::class);
+    $this->expectException(CalculatorInputException::class);
     $this->calculator->calcPrimeNumbers([]);
   }
 
@@ -81,7 +81,6 @@ class IntegerCalculatorTest extends TestCase
   public function testValidPrimeNumbers(): void
   {
     $result = $this->calculator->calcPrimeNumbers([2, 5, 11, 17]);
-
     $expected = '<?xml version="1.0" encoding="UTF-8"?>
                     <primeNumbers amount="4">
                       <result>
@@ -91,44 +90,51 @@ class IntegerCalculatorTest extends TestCase
                         <number>17</number>
                       </result>
                     </primeNumbers>';
-
     $this->assertXmlStringEqualsXmlString($expected, $result);
   }
 
 
-  /* // Test with non-prime numbers */
-  /* public function testWithNonPrimeNumbers() */
-  /* { */
-  /*   $result = $this->calculator->calcPrimeNumbers([4, 6, 15, 20]); */
-  /*   $this->assertEquals('<primeNumbers amount="0"><result/></primeNumbers>', $result); */
-  /* } */
+  // Test with non-prime numbers
+  public function testWithNonPrimeNumbers(): void
+  {
+    $this->expectException(FormatterInputException::class);
+    $this->calculator->calcPrimeNumbers([4, 6, 15, 20]);
+  }
 
-  /* // Test with mixed numbers */
-  /* public function testMixedNumbers() */
-  /* { */
-  /*   $result = $this->calculator->calcPrimeNumbers([2, 9, 13, 30]); */
-  /*   $this->assertEquals('<primeNumbers amount="2"><result><number>2</number><number>13</number></result></primeNumbers>', $result); */
-  /* } */
-  /**/
-  /* // Test with array exceeding 500 elements */
-  /* public function testArraySizeException() */
-  /* { */
-  /*   $largeArray = range(1, 501); // Array with 501 elements */
-  /*   $this->expectException(CalculatorInputException::class); */
-  /*   $this->calculator->calcPrimeNumbers($largeArray); */
-  /* } */
-  /**/
-  /* // Test with non-integers */
-  /* public function testNonIntegerException() */
-  /* { */
-  /*   $this->expectException(CalculatorInputException::class); */
-  /*   $this->calculator->calcPrimeNumbers([2, 3.14, 7]); */
-  /* } */
-  /**/
-  /* // Test with integers exceeding +/- 10000 */
-  /* public function testIntegerRangeException() */
-  /* { */
-  /*   $this->expectException(CalculatorInputException::class); */
-  /*   $this->calculator->calcPrimeNumbers([2, 5, 10001]); */
-  /* } */
+  // Test with mixed numbers
+  public function testMixedNumbers(): void
+  {
+    $result = $this->calculator->calcPrimeNumbers([2, 9, 13, 30]);
+    $expected = '<?xml version="1.0" encoding="UTF-8"?>
+                    <primeNumbers amount="2">
+                      <result>
+                        <number>2</number>
+                        <number>13</number>
+                      </result>
+                    </primeNumbers>';
+    $this->assertXmlStringEqualsXmlString($expected, $result);
+  }
+
+
+  // Test with array exceeding 500 elements
+  public function testArraySizeException()
+  {
+    $largeArray = range(1, 501);
+    $this->expectException(CalculatorInputException::class);
+    $this->calculator->calcPrimeNumbers($largeArray);
+  }
+
+  // Test with non-integers
+  public function testNonIntegerException()
+  {
+    $this->expectException(CalculatorInputException::class);
+    $this->calculator->calcPrimeNumbers([2, 3.14, 7]);
+  }
+
+  // Test with integers exceeding +/- 10000
+  public function testIntegerRangeException()
+  {
+    $this->expectException(CalculatorInputException::class);
+    $this->calculator->calcPrimeNumbers([2, 5, 10001]);
+  }
 }

@@ -93,6 +93,9 @@ class IntegerCalculator
    */
   public function calcPrimeNumbers(array $integerArray): string
   {
+    if (empty($integerArray)) {
+      throw new CalculatorInputException('Input array cannot be empty');
+    }
     if (count($integerArray) > 500) {
       throw new CalculatorInputException("Array cannot exceed 500 elements");
     }
