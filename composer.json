@@ -1,6 +1,6 @@
 {
   "name": "ktsirangelos/math-functions",
-  "description": "A class which offers utility functions for finding divisors, calculating factorials, and identifying prime numbers.",
+  "description": "Utility functions for finding divisors, calculating factorials, and identifying prime numbers.",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -14,6 +14,9 @@
     "psr-4": {
       "MathFunctions\\": "src/"
     }
+  },
+  "require": {
+    "php": "^8.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.1"

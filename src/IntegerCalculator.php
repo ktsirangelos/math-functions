@@ -8,7 +8,7 @@ use MathFunctions\MathResultFormatter;
 /**
  * A class providing various integer-based mathematical operations.
  */
-class IntegerOperations
+class IntegerCalculator
 {
   const FACTORIALS = [
     0 => 1,
