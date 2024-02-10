@@ -56,10 +56,10 @@ class IntegerCalculator
 
     for ($i = 2; $i <= $sqrtInteger; $i++) {
       if ($absInteger % $i == 0) {
-        $divisors = [...$divisors, $i, -$i];
+        array_push($divisors, $i, -$i);
 
         if ($i != $sqrtInteger) {
-          $divisors = [...$divisors, $absInteger / $i, - ($absInteger / $i)];
+          array_push($divisors, $absInteger / $i, - ($absInteger / $i));
         }
       }
     }

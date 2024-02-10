@@ -50,4 +50,22 @@ class IntegerCalculatorTest extends TestCase
     $this->expectException(MathInputException::class);
     $this->calculator->calcDivisors(12.65);
   }
+
+  public function testCalcFactorial()
+  {
+    // Valid Values
+    $this->assertEquals(1, $this->calculator->calcFactorial(0));
+    $this->assertEquals(120, $this->calculator->calcFactorial(5));
+    $this->assertEquals(3628800, $this->calculator->calcFactorial(10));
+
+    // Invalid Values
+    $this->expectException(MathInputException::class);
+    $this->calculator->calcFactorial(-3);
+
+    $this->expectException(MathInputException::class);
+    $this->calculator->calcFactorial(15);
+
+    $this->expectException(MathInputException::class);
+    $this->calculator->calcFactorial("hello");
+  }
 }
