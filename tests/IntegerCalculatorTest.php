@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use MathFunctions\IntegerCalculator;
 use MathFunctions\MathInputException;
 
-class IntegercalculatorsTest extends TestCase
+class IntegerCalculatorTest extends TestCase
 {
   private $calculator;
 
