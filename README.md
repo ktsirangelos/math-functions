@@ -6,10 +6,11 @@ The MathFunctions package provides a set of classes for performing various integ
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Exceptions](#exceptions)
-5. [Contributing](#contributing)
-6. [License](#license)
+3. [Running Unit Tests](#running-unit-tests)
+4. [Usage](#usage)
+5. [Exceptions](#exceptions)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Requirements
 
@@ -20,6 +21,29 @@ The MathFunctions package provides a set of classes for performing various integ
 
 ```bash
 composer require ktsirangelos/math-functions
+```
+
+## Running Unit Tests
+
+To run the unit tests for this library:
+
+1. Clone the GitHub repository
+
+```bash
+git clone https://github.com/ktsirangelos/math-functions.git
+```
+
+2. Install dependencies
+
+```bash
+cd math-functions
+composer install
+```
+
+3. Execute the tests
+
+```bash
+./vendor/bin/phpunit tests
 ```
 
 ## Usage
