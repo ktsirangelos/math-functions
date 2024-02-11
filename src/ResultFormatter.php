@@ -9,7 +9,7 @@ use MathFunctions\Exceptions\FormatterInputException;
 /**
  * Provides XML formatting functionality for mathematical results.
  */
-class CalculatorResultFormatter
+class ResultFormatter
 {
   /**
    * Formats mathematical calculation results into an XML string.
@@ -46,4 +46,3 @@ class CalculatorResultFormatter
     return $dom->saveXML();
   }
 }
-

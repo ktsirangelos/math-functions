@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MathFunctions;
 
 use MathFunctions\Exceptions\CalculatorInputException;
-use MathFunctions\CalculatorResultFormatter;
+use MathFunctions\ResultFormatter;
 
 /**
  * A class providing various integer-based mathematical operations.
@@ -121,7 +121,7 @@ class IntegerCalculator
       }
     }
 
-    return (new CalculatorResultFormatter())->toXML('primeNumbers', $primeNumbers);
+    return (new ResultFormatter())->toXML('primeNumbers', $primeNumbers);
   }
 
   /**

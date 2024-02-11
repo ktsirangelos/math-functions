@@ -6,7 +6,7 @@ namespace MathFunctions\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use MathFunctions\CalculatorResultFormatter;
+use MathFunctions\ResultFormatter;
 use MathFunctions\Exceptions\FormatterInputException;
 
 class CalculatorResultFormatterTest extends TestCase
@@ -15,7 +15,7 @@ class CalculatorResultFormatterTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->formatter = new CalculatorResultFormatter();
+    $this->formatter = new ResultFormatter();
   }
 
   public static function xmlOutputDataProvider(): array
