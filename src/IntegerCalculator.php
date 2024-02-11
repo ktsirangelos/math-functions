@@ -98,19 +98,18 @@ class IntegerCalculator
     }
     return self::FACTORIALS[$number];
 
-    // Alternative dynamic approach
-    //
-    // if ($number == 0) {
-    //  return 1;
-    // }
-    //
-    // $result = 1;
-    // for ($i = 2; $i <= $number; $i++) {
-    //  $result *= $i;
-    // }
-    //
-    // return $result;
+    /* Alternative dynamic approach */
 
+    /* if ($number == 0) { */
+    /*   return 1; */
+    /* } */
+    /**/
+    /* $result = 1; */
+    /* for ($i = 2; $i <= $number; $i++) { */
+    /*   $result *= $i; */
+    /* } */
+    /**/
+    /* return $result; */
   }
 
   /**

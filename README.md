@@ -25,6 +25,29 @@ $divisors = $integerCalculator->calcDivisors(12);
 // Expected Output: [2, 3, 4, 6, -2, -3, -4, -6]
 ```
 
+#### Mathematical Explanation
+
+- Initialization
+
+  `divisors = []`: Creates an empty array to store the discovered divisors.\
+  `absInteger = abs($integer)`: Stores the absolute value of the input integer, allowing the algorithm to work with both positive and negative numbers.\
+  `sqrtInteger = sqrt($absInteger)`: Calculates the square root of the absolute integer. This is used for optimization, as explained below.
+
+- Iteration and Divisor Search
+
+  The for loop iterates from `i = 2` up to the `sqrtInteger`: Why iterate up to the square root? If a number `a` is a divisor of `n`, then `n / a` is also a divisor. Additionally, one of these divisors (`a` or `n / a`) will always be less than or equal to the square root of `n`.
+
+- Divisibility Check
+
+  `if ($absInteger % $i == 0)`: This checks if the current loop counter `i` divides the `absInteger` without a remainder. If so, we have found a divisor pair.
+  `array_push($divisors, $i, -$i)`: Both `i` and its negative counterpart `-i` are added to the divisors array.
+
+- Handling the Complementary Divisor
+
+  `if ($i != $sqrtinteger)`: this condition prevents duplicate processing in cases where the integer is a perfect square root.
+  `$compldivisor = $absinteger / $i`: calculates the larger complementary divisor by dividing the `absinteger` by `i`.
+  `array_push($divisors, $compldivisor, -$compldivisor)`: both the complementary divisor and its negative counterpart are pushed into the divisors array.
+
 ### Calculating Factorials
 
 To calculate the factorial of an integer, use the calcFactorial() method:
@@ -58,6 +81,27 @@ $primeNumbersXML = $integerCalculator->calcPrimeNumbers([2, 3, 4, 5, 6, 7]);
 //   </result>
 // </primeNumbers>
 ```
+
+#### Mathematical Explanation (of the private method isPrime)
+
+- Base Cases
+
+  `if ($integer <= 1)`: Numbers less than or equal to 1 are not prime by definition.\
+  `if ($integer <= 3)`: The numbers 2 and 3 are prime.
+
+- Eliminating Multiples of 2 and 3:
+
+  `if ($integer % 2 == 0 || $integer % 3 == 0)`: Any number divisible by 2 or 3 is not prime. This check quickly eliminates a large proportion of non-prime numbers.
+
+- Optimized Testing
+
+  `$sqrtInteger = sqrt($integer)`: Calculates the square root of the input integer. This is important because if a number has a divisor, one of the divisors must be less than or equal to its square root.
+
+  `for ($i = 5; $i <= $sqrtInteger; $i += 6)`: This loop starts with `i = 5` since all primes greater than `3` are of the form `(6k ± 1)`, where `k` is any integer. It increments `i` by `6` in each iteration, effectively checking divisibility by `(6k - 1)` and `(6k + 1)` in a single pass.
+
+- Divisibility Tests
+
+  `if ($integer % $i == 0 || $integer % ($i + 2) == 0)`: The algorithm tests for divisibility by numbers of the form `(6k ± 1)`. If the integer is divisible by any of these, it is not a prime number.
 
 ### Formatting Calculation Results
 
