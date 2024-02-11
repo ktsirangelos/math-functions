@@ -48,7 +48,6 @@ class IntegerCalculator
   {
     if ($integer == 0) {
       throw new CalculatorInputException("Input must not be zero");
-      throw new ("Input must not be zero");
     }
     if ($integer == 1 || $integer == -1) {
       throw new CalculatorInputException("Input must not be one or negative one");
@@ -69,9 +68,13 @@ class IntegerCalculator
 
     for ($i = 2; $i <= $sqrtInteger; $i++) {
       if ($absInteger % $i == 0) {
+        // Divisor identified. Store both the divisor and its negative
+        // counterpart since negative numbers can also be divisors.
         array_push($divisors, $i, -$i);
 
         if ($i != $sqrtInteger) {
+          // If 'i' is not the square root, its corresponding 'complement' (number / 'i')
+          // is also a divisor. Store the complement and its negative as well.
           $complDivisor = $absInteger / $i;
           array_push($divisors, $complDivisor, -$complDivisor);
         }
@@ -97,7 +100,7 @@ class IntegerCalculator
     }
     return self::FACTORIALS[$number];
 
-    /* Alternative dynamic approach */
+    /* Alternative Dynamic Approach */
 
     /* if ($number == 0) { */
     /*   return 1; */
@@ -149,7 +152,24 @@ class IntegerCalculator
   }
 
   /**
-   * Determines whether an integer is a prime number.
+   * Determines whether an integer is a prime number. A prime number is a natural 
+   * number greater than 1 that has exactly two divisors: 1 and itself.
+   *
+   * This function employs several optimizations:
+   *
+   * * **Base Cases:** Numbers less than or equal to 1 are not prime. The prime numbers 2 and 3
+   *   are handled separately for efficiency.
+   *
+   * * **Divisibility by 2 and 3:** Even numbers (except 2) and multiples of 3 are quickly eliminated 
+   *   as they cannot be prime.
+   *
+   * * **Square Root Check:** If a number 'n' has a divisor greater than its square root, it must 
+   *   also have a divisor smaller than its square root. Hence, we only need to check for divisors 
+   *   up to the square root of 'n'.
+   *
+   * * **6k ± 1 Optimization:** Prime numbers greater than 3 can be expressed in the form '6k ± 1' 
+   *    (where 'k' is any integer). The function focuses on potential divisors of this form,
+   *    skipping unnecessary checks.
    *
    * @param int $integer The integer to check for primality.
    * @return bool True if the number is prime, false otherwise.
