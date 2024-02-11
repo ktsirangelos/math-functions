@@ -60,7 +60,7 @@ class IntegerCalculatorTest extends TestCase
   }
 
   #[DataProvider('calcFactorialValidDataProvider')]
-  public function testCalcFactorial($integer, $expectedFactorial): void
+  public function testCalcFactorialValidInput($integer, $expectedFactorial): void
   {
     $result = $this->calculator->calcFactorial($integer);
     $this->assertEquals($result, $expectedFactorial);
@@ -80,16 +80,12 @@ class IntegerCalculatorTest extends TestCase
     $this->calculator->calcFactorial($invalidInput);
   }
 
-  public function testEmptyArray(): void
+  public static function calcPrimeNumbersValidDataProvider(): array
   {
-    $this->expectException(CalculatorInputException::class);
-    $this->calculator->calcPrimeNumbers([]);
-  }
-
-  public function testValidPrimeNumbers(): void
-  {
-    $result = $this->calculator->calcPrimeNumbers([2, 5, 11, 17]);
-    $expected = '<?xml version="1.0" encoding="UTF-8"?>
+    return [
+      [
+        [2, 5, 11, 17],
+        '<?xml version="1.0" encoding="UTF-8"?>
                     <primeNumbers amount="4">
                       <result>
                         <number>2</number>
@@ -97,45 +93,48 @@ class IntegerCalculatorTest extends TestCase
                         <number>11</number>
                         <number>17</number>
                       </result>
-                    </primeNumbers>';
-    $this->assertXmlStringEqualsXmlString($expected, $result);
-  }
-
-  public function testMixedNumbers(): void
-  {
-    $result = $this->calculator->calcPrimeNumbers([2, 9, 13, 30]);
-    $expected = '<?xml version="1.0" encoding="UTF-8"?>
+                    </primeNumbers>'
+      ],
+      [
+        [2, 9, 13, 30],
+        '<?xml version="1.0" encoding="UTF-8"?>
                     <primeNumbers amount="2">
                       <result>
                         <number>2</number>
                         <number>13</number>
                       </result>
-                    </primeNumbers>';
-    $this->assertXmlStringEqualsXmlString($expected, $result);
+                    </primeNumbers>'
+      ],
+    ];
   }
 
-  public function testWithNonPrimeNumbers(): void
+  #[DataProvider('calcPrimeNumbersValidDataProvider')]
+  public function testCalcPrimeNumbersValidInput($integerArray, $xmlDoc): void
+  {
+    $result = $this->calculator->calcPrimeNumbers($integerArray);
+    $this->assertXmlStringEqualsXmlString($result, $xmlDoc);
+  }
+
+  public static function calcPrimeNumbersInvalidDataProvider(): array
+  {
+    return [
+      [range(1, 501)],
+      [[2, 3.14, 7]],
+      [[2, 5, 10001]],
+      [[]]
+    ];
+  }
+
+  #[DataProvider('calcPrimeNumbersInvalidDataProvider')]
+  public function testCalcPrimeNumbersInvalidInput($invalidInput): void
+  {
+    $this->expectException(CalculatorInputException::class);
+    $this->calculator->calcPrimeNumbers($invalidInput);
+  }
+
+  public function testCalcPrimeNumbersWithNonPrimeNumbers(): void
   {
     $this->expectException(FormatterInputException::class);
     $this->calculator->calcPrimeNumbers([4, 6, 15, 20]);
-  }
-
-  public function testArraySizeException()
-  {
-    $largeArray = range(1, 501);
-    $this->expectException(CalculatorInputException::class);
-    $this->calculator->calcPrimeNumbers($largeArray);
-  }
-
-  public function testNonIntegerException()
-  {
-    $this->expectException(CalculatorInputException::class);
-    $this->calculator->calcPrimeNumbers([2, 3.14, 7]);
-  }
-
-  public function testIntegerRangeException()
-  {
-    $this->expectException(CalculatorInputException::class);
-    $this->calculator->calcPrimeNumbers([2, 5, 10001]);
   }
 }
