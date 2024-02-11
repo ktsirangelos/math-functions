@@ -1,6 +1,6 @@
 {
   "name": "ktsirangelos/math-functions",
-  "description": "Utility functions for finding divisors, calculating factorials, and identifying prime numbers.",
+  "description": "A PHP library for integer-based mathematical operations (divisors, factorials, prime numbers) with XML formatting support for presenting calculation results.",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -9,7 +9,7 @@
       "email": "ktsirangelos@proton.me"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "MathFunctions\\": "src/"
