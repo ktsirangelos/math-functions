@@ -1,6 +1,6 @@
 {
   "name": "ktsirangelos/math-functions",
-  "description": "A PHP library for integer-based mathematical operations (divisors, factorials, prime numbers) with XML formatting support for presenting calculation results.",
+  "description": "A set of integer-based mathematical operations (divisors, factorials, prime numbers) with XML formatting support for presenting calculation results.",
   "type": "library",
   "license": "MIT",
   "authors": [
