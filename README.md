@@ -2,6 +2,15 @@
 
 The MathFunctions package provides a set of classes for performing various integer-based mathematical operations. It includes functionalities for calculating divisors, factorials, and identifying prime numbers within an array of integers. Additionally, it offers XML formatting for presenting calculation results.
 
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Exceptions](#exceptions)
+4. [Requirements](#requirements)
+5. [Contributing](#contributing)
+6. [License](#license)
+
 ## Installation
 
 You can install the MathFunctions package via [Composer](https://getcomposer.org/):
@@ -22,7 +31,7 @@ use MathFunctions\IntegerCalculator;
 $integerCalculator = new IntegerCalculator();
 // Example usage with integer 12
 $divisors = $integerCalculator->calcDivisors(12);
-// Expected Output: [2, 3, 4, 6, -2, -3, -4, -6]
+// Expected Output: [-6, -4, -3, -2, 2, 3, 4, 6]
 ```
 
 #### Mathematical Explanation
@@ -126,7 +135,7 @@ $xmlResult = $resultFormatter->toXML('evenNumbers', [2, 4, 6, 8]);
 
 ## Exceptions
 
-The package may throw exceptions for invalid inputs. Ensure to catch and handle these exceptions appropriately in your code.
+The functions may throw exceptions for invalid inputs. Ensure to catch and handle these exceptions appropriately in your code.
 
 ## Requirements
 
