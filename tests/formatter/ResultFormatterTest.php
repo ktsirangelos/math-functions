@@ -6,7 +6,7 @@ namespace MathFunctions\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use MathFunctions\ResultFormatter;
+use MathFunctions\Utilities\ResultFormatter;
 use MathFunctions\Exceptions\FormatterInputException;
 
 class CalculatorResultFormatterTest extends TestCase

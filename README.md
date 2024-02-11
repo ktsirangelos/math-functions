@@ -64,7 +64,7 @@ $primeNumbersXML = $integerCalculator->calcPrimeNumbers([2, 3, 4, 5, 6, 7]);
 You can format calculation results into an XML string using the ResultFormatter class:
 
 ```php
-use MathFunctions\ResultFormatter;
+use MathFunctions\Utilities\ResultFormatter;
 
 $resultFormatter = new ResultFormatter();
 // Example usage with an array of even numbers
