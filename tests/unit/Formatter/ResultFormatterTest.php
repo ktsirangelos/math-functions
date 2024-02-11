@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MathFunctions\Tests;
+namespace MathFunctions\Tests\Unit\Formatter;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;

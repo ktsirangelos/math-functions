@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MathFunctions\Tests;
+namespace MathFunctions\Tests\Unit\Calculator;
 
 use PHPUnit\Framework\TestCase;
 use MathFunctions\IntegerCalculator;

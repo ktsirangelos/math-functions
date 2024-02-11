@@ -2,10 +2,10 @@
 <phpunit colors="true" bootstrap="vendor/autoload.php">
   <testsuites>
     <testsuite name="Calculator">
-      <directory>tests/calculator</directory>
+      <directory>tests/unit/Calculator</directory>
     </testsuite>
     <testsuite name="Formatter">
-      <directory>tests/formatter</directory>
+      <directory>tests/unit/Formatter</directory>
     </testsuite>
   </testsuites>
 </phpunit>
