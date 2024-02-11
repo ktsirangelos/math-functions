@@ -1,6 +1,6 @@
 <?php
 
-/* declare(strict_types=1); */
+declare(strict_types=1);
 
 namespace MathFunctions\Utilities;
 
@@ -29,14 +29,14 @@ class ResultFormatter
     $dom = new \DOMDocument('1.0', 'UTF-8');
 
     $root = $dom->createElement($numbersType);
-    $root->setAttribute('amount', count($numbers));
+    $root->setAttribute('amount', (string)count($numbers));
     $dom->appendChild($root);
 
     $resultNode = $dom->createElement('result');
     $root->appendChild($resultNode);
 
     foreach ($numbers as $number) {
-      $numberNode = $dom->createElement('number', $number);
+      $numberNode = $dom->createElement('number', (string)$number);
       $resultNode->appendChild($numberNode);
     }
 

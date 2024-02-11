@@ -13,7 +13,7 @@ use MathFunctions\Utilities\ResultFormatter;
 class IntegerCalculator
 {
   const MAX_ALLOWED_INTEGER = 10000;
-  const MIN_ALLOWED_INTEGER = - (self::MAX_ALLOWED_INTEGER);
+  const MIN_ALLOWED_INTEGER = -10000;
   const MAX_FACTORIAL_RANGE = 12;
   const MAX_ARRAY_SIZE = 500;
 
@@ -42,13 +42,13 @@ class IntegerCalculator
    *
    * @param int $integer The integer to find divisors for.
    * @return int[] An array of divisors.
-   * @throws InvalidArgumentException If the input is not an integer.
    * @throws CalculatorInputException If the input is invalid.
    */
   public function calcDivisors(int $integer): array
   {
     if ($integer == 0) {
       throw new CalculatorInputException("Input must not be zero");
+      throw new ("Input must not be zero");
     }
     if ($integer == 1 || $integer == -1) {
       throw new CalculatorInputException("Input must not be one or negative one");
@@ -88,7 +88,6 @@ class IntegerCalculator
    *
    * @param int $number The number to calculate the factorial of.
    * @return int The factorial of the number.
-   * @throws InvalidArgumentException If the input is not an integer.
    * @throws CalculatorInputException If the input is invalid.
    */
   public function calcFactorial(int $number): int
@@ -154,7 +153,6 @@ class IntegerCalculator
    *
    * @param int $integer The integer to check for primality.
    * @return bool True if the number is prime, false otherwise.
-   * @throws InvalidArgumentException If the input is invalid.
    */
   private function isPrime(int $integer): bool
   {

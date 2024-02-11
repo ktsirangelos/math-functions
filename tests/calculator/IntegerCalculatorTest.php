@@ -19,7 +19,6 @@ class IntegerCalculatorTest extends TestCase
     $this->calculator = new IntegerCalculator();
   }
 
-  // Tests for calcDivisors
   public static function calcDivisorsValidDataProvider(): array
   {
     return [
@@ -51,7 +50,6 @@ class IntegerCalculatorTest extends TestCase
     $this->calculator->calcDivisors($invalidInput);
   }
 
-  //Tests for calcFactorial
   public static function calcFactorialValidDataProvider(): array
   {
     return [
@@ -82,7 +80,6 @@ class IntegerCalculatorTest extends TestCase
     $this->calculator->calcFactorial($invalidInput);
   }
 
-  //Tests for calcPrimeNumbers
   public function testEmptyArray(): void
   {
     $this->expectException(CalculatorInputException::class);
