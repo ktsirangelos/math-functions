@@ -15,7 +15,7 @@ class ResultFormatter
    * Formats mathematical calculation results into an XML string.
    *
    * @param string $numbersType The type of numbers to be placed in the parent element (e.g. "primeNumbers").
-   * @param array $numbers An array of numbers to be placed in the child elements.
+   * @param array $numbers An array of numbers to be placed in the child elements (must not be empty).
    *
    * @return string The formatted XML string representing the calculation result.
    * @throws FormatterInputException If the input array is empty.

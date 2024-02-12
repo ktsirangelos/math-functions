@@ -20,7 +20,7 @@ The MathFunctions package provides a set of classes for performing various integ
 ## Installation
 
 ```bash
-composer require ktsirangelos/math-functions
+$ composer require ktsirangelos/math-functions
 ```
 
 ## Running Unit Tests
@@ -30,20 +30,20 @@ To run the unit tests for this library:
 1. Clone the GitHub repository
 
 ```bash
-git clone https://github.com/ktsirangelos/math-functions.git
+$ git clone https://github.com/ktsirangelos/math-functions.git
 ```
 
 2. Install dependencies
 
 ```bash
-cd math-functions
-composer install
+$ cd math-functions
+$ composer install
 ```
 
 3. Execute the tests
 
 ```bash
-./vendor/bin/phpunit tests
+$ ./vendor/bin/phpunit tests
 ```
 
 ## Usage
@@ -106,7 +106,7 @@ $resultFormatter = new ResultFormatter();
 // Example usage with an array of even numbers
 $xmlResult = $resultFormatter->toXML('evenNumbers', [2, 4, 6, 8]);
 // Expected Output (XML string):
-// <evenNnumbers amount="4">
+// <evenNumbers amount="4">
 //   <result>
 //     <number>2</number>
 //     <number>4</number>

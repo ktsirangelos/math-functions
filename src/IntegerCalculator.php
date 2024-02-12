@@ -40,8 +40,8 @@ class IntegerCalculator
   /**
    * Calculates the positive and negative divisors of an integer (excluding 1 and itself).
    *
-   * @param int $integer The integer to find divisors for.
-   * @return int[] An array of divisors.
+   * @param int $integer The integer to find divisors for (must not be 0, 1, -1 and must be between -10000 and 10000).
+   * @return int[] An array of the integer's divisors.
    * @throws CalculatorInputException If the input is invalid.
    */
   public function calcDivisors(int $integer): array
@@ -68,13 +68,13 @@ class IntegerCalculator
 
     for ($i = 2; $i <= $sqrtInteger; $i++) {
       if ($absInteger % $i == 0) {
-        // Divisor identified. Store both the divisor and its negative
-        // counterpart since negative numbers can also be divisors.
+        /* Divisor identified. Store both the divisor and its negative */
+        /* counterpart since negative numbers can also be divisors. */
         array_push($divisors, $i, -$i);
 
         if ($i != $sqrtInteger) {
-          // If 'i' is not the square root, its corresponding 'complement' (number / 'i')
-          // is also a divisor. Store the complement and its negative as well.
+          /* If 'i' is not the square root, its corresponding 'complement' (number / 'i') */
+          /* is also a divisor. Store the complement and its negative as well. */
           $complDivisor = $absInteger / $i;
           array_push($divisors, $complDivisor, -$complDivisor);
         }
@@ -89,7 +89,7 @@ class IntegerCalculator
   /**
    * Calculates the factorial of a number.
    *
-   * @param int $number The number to calculate the factorial of.
+   * @param int $number The number to calculate the factorial of (must be an integer between 0 and 12)
    * @return int The factorial of the number.
    * @throws CalculatorInputException If the input is invalid.
    */
@@ -117,7 +117,7 @@ class IntegerCalculator
   /**
    * Finds prime numbers within an array of integers and returns them in XML format.
    *
-   * @param int[] $integerArray An array of integers.
+   * @param int[] $integerArray An array of integers to search for prime Numbers (1-500 elements).
    * @return string An XML string containing the prime numbers with an 'amount' attribute.
    * @throws CalculatorInputException If the input is invalid.
    */
@@ -155,33 +155,25 @@ class IntegerCalculator
    * Determines whether an integer is a prime number. A prime number is a natural 
    * number greater than 1 that has exactly two divisors: 1 and itself.
    *
-   * This function employs several optimizations:
-   *
-   * * **Base Cases:** Numbers less than or equal to 1 are not prime. The prime numbers 2 and 3
-   *   are handled separately for efficiency.
-   *
-   * * **Divisibility by 2 and 3:** Even numbers (except 2) and multiples of 3 are quickly eliminated 
-   *   as they cannot be prime.
-   *
-   * * **Square Root Check:** If a number 'n' has a divisor greater than its square root, it must 
-   *   also have a divisor smaller than its square root. Hence, we only need to check for divisors 
-   *   up to the square root of 'n'.
-   *
-   * * **6k ± 1 Optimization:** Prime numbers greater than 3 can be expressed in the form '6k ± 1' 
-   *    (where 'k' is any integer). The function focuses on potential divisors of this form,
-   *    skipping unnecessary checks.
-   *
    * @param int $integer The integer to check for primality.
    * @return bool True if the number is prime, false otherwise.
    */
   private function isPrime(int $integer): bool
   {
+    /*  Numbers less than or equal to 1 are not prime. The prime numbers 2 and 3 */
+    /*  are handled separately for efficiency. */
     if ($integer <= 1) return false;
     if ($integer <= 3) return true;
+    /*  Even numbers (except 2) and multiples of 3 are quickly eliminated  */
+    /*  as they cannot be prime. */
     if ($integer % 2 == 0 || $integer % 3 == 0) return false;
-
+    /*  If a number 'n' has a divisor greater than its square root, it must  */
+    /*  also have a divisor smaller than its square root. Hence, we only need to check for divisors  */
+    /*  up to the square root of 'n'. */
     $sqrtInteger = sqrt($integer);
-
+    /*  Prime numbers greater than 3 can be expressed in the form '6k ± 1'  */
+    /*  (where 'k' is any integer). The function focuses on potential divisors of this form, */
+    /*  skipping unnecessary checks. */
     for ($i = 5; $i <= $sqrtInteger; $i += 6) {
       if ($integer % $i == 0 || $integer % ($i + 2) == 0) {
         return false;
