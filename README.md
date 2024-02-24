@@ -97,7 +97,7 @@ $primeNumbersXML = $integerCalculator->calcPrimeNumbers([2, 3, 4, 5, 6, 7]);
 
 ### Formatting Calculation Results
 
-You can format calculation results into an XML string using the `toXML` method:
+You can format calculation results into an XML string using the `toXML()` method:
 
 ```php
 use MathFunctions\Utilities\ResultFormatter;
